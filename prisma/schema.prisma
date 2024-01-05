@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  description String
+  imageUrl    String
+  name        String
+  price       Int
+  createAt    DateTime   @default(now())
+  updatedAt   DateTime   @default(now())
+  CartItem    CartItem[]
+
+  @@map("products")// creates an instance of the Product model in "products" collection
+}
+
+model Cart {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId //creates ID automatically for each item in the collection
+  items  CartItem[]
+  createAt  DateTime   @default(now())
+  updatedAt DateTime   @default(now())
+
+  @@map("carts")
+}
+
+model CartItem {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  productId String  @db.ObjectId //id of the product that is now an item in the cart
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  //relations is used to tell prisma what model the id belongs to.
+  //References the id of the Product moddel this CartItem model comes from.
+  //Prisma takes @relations and creates a new field in the Product model to link CartItem model to it
+  //onDelete: Cascade - if a product is deleted, all the CartItem instances of the product will also be deleted in the db to prevent users having items that no longer exist in store in their cart
+  quantity  Int
+  cartId    String  @db.ObjectId//the id of the Cart the cartItem belongs to
+  cart      Cart    @relation(fields: [cartId], references: [id])//References the id of the Cart model this CartItem belongs to.
+
+  @@map("cartitems")
+}
+
+//npx prisma init
+//npx prisma db pull
+//npx prisma db push
+//npx prisma generate - 
+
+
+//EXPLANATION
+//Several instances of product exist in our products collection. Each product has a unique identifier which is used to reference it 
+//Basically, when a user clicks the add to cart button on any product instance, prisma uses the id of the unique product to create a new instance of CartItem in cartitems collection. Once a CartItem exists, a new Cart instance is also instanteneously created in the carts collection, and it's data will be the CartItem
