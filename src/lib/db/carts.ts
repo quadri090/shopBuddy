@@ -6,6 +6,10 @@ export type CartWithProducts = Prisma.CartGetPayload<{ //fetching db collections
     include: { items: {include: {product: true} } }
 }>
 
+export type CartItemWithProduct = Prisma.CartItemGetPayload<{
+    include: { product: true }
+}>
+
 export type ShoppingCart = CartWithProducts & {//adding new fields to the data fetched with prisma
     size: number,
     subtotal: number,

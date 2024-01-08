@@ -1,3 +1,3 @@
 export default function LoadingPage() {
-    return <span className="block m-auto loading loading-dots loading-lg"></span>
+    return <span className="block mx-auto mt-[23y%] loading loading-dots loading-lg"></span>
 }

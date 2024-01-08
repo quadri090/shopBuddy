@@ -39,7 +39,7 @@ model CartItem {
   //onDelete: Cascade - if a product is deleted, all the CartItem instances of the product will also be deleted in the db to prevent users having items that no longer exist in store in their cart
   quantity  Int
   cartId    String  @db.ObjectId//the id of the Cart the cartItem belongs to
-  cart      Cart    @relation(fields: [cartId], references: [id])//References the id of the Cart model this CartItem belongs to.
+  cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)//References the id of the Cart model this CartItem belongs to.
 
   @@map("cartitems")
 }

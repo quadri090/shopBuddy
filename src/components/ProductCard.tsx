@@ -29,7 +29,7 @@ export default function ProductCard({product}: ProductCardProps) {
                     {product.name}
                 </h2>
                 {isNewer && <div className="badge badge-secondary text-xs">NEW</div>}
-                <p>{product.description}</p>
+                <p>{`${product.description.slice(0, 70)}${product.description.length > 70 ? "..." : ""}`}</p>
                 <PriceTag
                     price={product.price}
                 />
