@@ -17,12 +17,14 @@ model Product {
   updatedAt   DateTime   @default(now())
   CartItem    CartItem[]
 
-  @@map("products")// creates an instance of the Product model in "products" collection
+  @@map("products") // creates an instance of the Product model in "products" collection
 }
 
 model Cart {
   id        String     @id @default(auto()) @map("_id") @db.ObjectId //creates ID automatically for each item in the collection
-  items  CartItem[]
+  items     CartItem[]
+  userId    String?    @db.ObjectId
+  user      User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
   createAt  DateTime   @default(now())
   updatedAt DateTime   @default(now())
 
@@ -38,17 +40,69 @@ model CartItem {
   //Prisma takes @relations and creates a new field in the Product model to link CartItem model to it
   //onDelete: Cascade - if a product is deleted, all the CartItem instances of the product will also be deleted in the db to prevent users having items that no longer exist in store in their cart
   quantity  Int
-  cartId    String  @db.ObjectId//the id of the Cart the cartItem belongs to
-  cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)//References the id of the Cart model this CartItem belongs to.
+  cartId    String  @db.ObjectId //the id of the Cart the cartItem belongs to
+  cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade) //References the id of the Cart model this CartItem belongs to.
 
   @@map("cartitems")
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique
+  userId       String   @db.ObjectId
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model User {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  Cart          Cart[]
+
+  @@map("users")
+}
+
+model VerificationToken {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verificationtokens")
 }
 
 //npx prisma init
 //npx prisma db pull
 //npx prisma db push
 //npx prisma generate - 
-
 
 //EXPLANATION
 //Several instances of product exist in our products collection. Each product has a unique identifier which is used to reference it 

@@ -1,11 +1,11 @@
-import type { Config } from 'tailwindcss'
-import daisyui from 'daisyui'
+import type { Config } from "tailwindcss";
+// import daisyui from 'daisyui'
 
 const config: Config = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   // theme: {
   //   extend: {
@@ -16,7 +16,7 @@ const config: Config = {
   //     // },
   //   },
   // },
-  plugins: [daisyui],
+  plugins: [require("daisyui")],
   daisyui: {
     themes: [
       {
@@ -37,5 +37,5 @@ const config: Config = {
       },
     ],
   },
-}
-export default config
+};
+export default config;

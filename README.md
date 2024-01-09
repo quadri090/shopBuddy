@@ -7,3 +7,4 @@ npm i
     prettier 
     eslint-config-prettier 
     prettier-plugin-tailwindcss
+    Zod : used to validate variables
