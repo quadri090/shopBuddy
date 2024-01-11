@@ -41,7 +41,7 @@ export default function UserMenuBtn({ session }: UserMenuBtnProps) {
       </label>
       <ul
         tabIndex={0}
-        className="menu dropdown-content menu-sm z-30 mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
+        className="menu dropdown-content menu-sm z-30 mt-3 w-32 rounded-box bg-base-100 p-2 shadow"
       >
         <li>
           {user ? (

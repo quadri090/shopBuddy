@@ -6,7 +6,7 @@ import { useFormStatus } from "react-dom";
 type FormButtonProps = {
   children: React.ReactNode;
   className?: string;
-} & ComponentProps<"button">; //react props that allows using custom props and regular button tag props.
+} & ComponentProps<"button">; //react directive that allows using custom props and regular button tag props.
 
 export default function FormButton({
   children,
