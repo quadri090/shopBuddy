@@ -9,7 +9,7 @@ interface HomeProps {
 }
 
 export default async function Home({
-  searchParams: { page = "1" },
+  searchParams: { page = "1" },//default/fallback page set to 1
 }: HomeProps) {
   const currentPage = parseInt(page);
 
@@ -43,7 +43,7 @@ export default async function Home({
               priority //tells nextjs to load this image first
             />
             <div>
-              <h1 className="c">{products[0].name}</h1>
+              <h1 className="text-3xl sm:text-5xl font-bold">{products[0].name}</h1>
               <p className="py-6">{products[0].description}</p>
               <Link
                 href={"/products/" + products[0].id}

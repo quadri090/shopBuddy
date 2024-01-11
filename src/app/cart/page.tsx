@@ -21,7 +21,7 @@ export default async function CartPage() {
         />
       ))}
       {!cart?.items.length && <p>Your Cart is Empty</p>}
-      <div className="flex flex-col items-end sm:items-center">
+      <div className="flex flex-col items-end sm:items-center mr-6 sm:mr-0">
         <p className="mb-6 font-bold">
           Total: {formatCurrency(cart?.subtotal || 0)}
         </p>
