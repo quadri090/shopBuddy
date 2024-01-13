@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-      <footer className="bg-neutral p-10 text-neutral-content rounded-t-3xl">
+      <footer className="bg-neutral px-10 pt-10 text-neutral-content rounded-t-3xl">
         <div className="footer m-auto max-w-7xl">
           <div>
             <span className="footer-title">Services</span>
@@ -22,6 +22,9 @@ export default function Footer() {
             <a className="link-hover link">Privacy policy</a>
             <a className="link-hover link">Cookie policy</a>
           </div>
+        </div>
+        <div className="mt-[50px] py-5">
+          <p className="text-center text-xs">© Quadri Jamal 2024. All rights reserved.</p>
         </div>
       </footer>
     );

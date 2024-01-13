@@ -32,7 +32,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <p className="text-sm sm:hidden">{`${product.description.slice(0, 40)}${
           product.description.length > 40 ? "..." : ""
         }`}</p>
-        <p className="text-base hidden sm:block">{`${product.description.slice(0, 80)}${
+        <p className="text-base hidden sm:block">{`${product.description.slice(0, 95)}${
           product.description.length > 80 ? "..." : ""
         }`}</p>
         <PriceTag price={product.price} />
