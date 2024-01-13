@@ -1,4 +1,4 @@
-import zod from "Zod" 
+import zod from "zod" 
 
 const envSchema =zod.object({
     DATABASE_URL:zod.string().nonempty(),
