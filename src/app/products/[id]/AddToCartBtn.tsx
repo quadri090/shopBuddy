@@ -9,7 +9,7 @@ interface AddToCartBtnProps {
 
 export default function AddToCartBtn({productId, incrementProductQuantity}: AddToCartBtnProps) {
     const [isPending, startTransition] = useTransition()
-    //purpose of usetransition is not blocking the ui when server state update is done or when calling a server action from a client component. it is used to so any error that occurs in the server action does not break the website but is instead forwarded to the error page
+    //purpose of usetransition is nto prevent blocking the ui when server state update is done or when calling a server action from a client component. it is used to so any error that occurs in the server action does not break the website but is instead forwarded to the error page
     const [success, setSuccess] = useState(false)
 
     return (

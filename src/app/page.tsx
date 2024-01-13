@@ -39,12 +39,12 @@ export default async function Home({
               alt={products[0].name}
               width={800}
               height={400}
-              className="w-full max-w-sm rounded-lg shadow-2xl"
+              className="w-full max-w-sm max- rounded-lg shadow-2xl"
               priority //tells nextjs to load this image first
             />
             <div>
               <h1 className="text-3xl sm:text-5xl font-bold">{products[0].name}</h1>
-              <p className="py-6">{products[0].description}</p>
+              <p className="py-6">{`${products[0].description.slice(0, 150)} ${products[0].description.length >= 150 ? "..." : ""}`}</p>
               <Link
                 href={"/products/" + products[0].id}
                 className="btn btn-primary"

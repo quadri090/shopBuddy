@@ -27,7 +27,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         />
       </figure>
       <div className="card-body text-base p-3 sm:p-8">
-        <h2 className="card-title">{product.name}</h2>
+        <h2 className="card-title text-base sm:text-[20px]">{product.name}</h2>
         {isNewer && <div className="badge badge-secondary text-xs">NEW</div>}
         <p className="text-sm sm:hidden">{`${product.description.slice(0, 40)}${
           product.description.length > 40 ? "..." : ""

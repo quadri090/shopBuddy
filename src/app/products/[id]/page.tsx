@@ -1,7 +1,6 @@
 import { prisma } from "@/lib/db/prisma"
 import { notFound } from "next/navigation"
 import Image from "next/image"
-import Link from "next/link"
 import PriceTag from "@/components/PriceTag"
 import { cache } from "react"
 import { Metadata } from "next"
