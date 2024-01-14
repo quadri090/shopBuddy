@@ -6,7 +6,7 @@ import { getCart } from "@/lib/db/carts";
 import ShoppingCartBtn from "./ShoppingCartBtn";
 import UserMenuBtn from "./UserMenuBtn";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import authOptions from "../api/auth/[...nextauth]/options";
 
 async function searchProducts(formData: FormData) {
   "use server"; //directive for server action in server component
