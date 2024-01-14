@@ -109,20 +109,14 @@ export async function mergeAnonymousCartIntoUserCart(userId: string) {
         where: { cartId: userCart.id }, //delete the existing cartIitems in the userCart
       });
 
-      await tx.cart.update({
-        where: { id: userCart.id },
-        data: {
-          items: {
-            createMany: {
-              //create new cartItem instances by mapping each item saved in the
-              data: mergedCartItems.map((item) => ({
-                productId: item.productId,
-                quantity: item.quantity,
-              })),
-            },
-          },
-        },
-      });
+      await tx.cartItem.createMany({
+        data: mergedCartItems.map((item) => ({
+          cartId: userCart.id,
+          productId: item.productId,
+          quantity: item.quantity,
+        })),
+      })
+      
     } else {
       //if theres no user cart
       await tx.cart.create({
@@ -164,3 +158,19 @@ function mergeCarts(...cartItems: CartItem[][]) {
 }
 
 //a dtatabase transaction is a process where multiple operations are executed simultaneously, if one of the operations fails, all transactions will be rolled backed and none will be executed.
+
+
+// await tx.cart.update({
+//   where: { id: userCart.id },
+//   data: {
+//     items: {
+//       createMany: {
+//         //create new cartItem instances by mapping each item saved in the
+//         data: mergedCartItems.map((item) => ({
+//           productId: item.productId,
+//           quantity: item.quantity,
+//         })),
+//       },
+//     },
+//   },
+// });
