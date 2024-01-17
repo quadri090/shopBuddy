@@ -30,10 +30,15 @@ export default async function SearchPage({searchParams : {query}}:  SearchPagePr
     }
 
     return (
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {products.map(product => (
-                <ProductCard product={product} key={product.id} />
-            ))}
-        </div>
+        <>
+            { products && (
+                <p className="py-4 font-semibold">{products.length} results found</p>
+            )}
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-2 xl:grid-cols-3">
+                {products.map(product => (
+                    <ProductCard product={product} key={product.id} />
+                ))}
+            </div>
+        </>
     )
 }
